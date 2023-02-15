@@ -1,0 +1,7 @@
+.is-invalid .v-input__slot{
+    border: 1px solid rgba(241, 3, 3, 0.54) !important;
+}
+.invalid-feedback.is-invalid{
+    font-size: 11px;
+    color: red;
+}
