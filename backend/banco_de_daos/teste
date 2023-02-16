@@ -1,0 +1,707 @@
+-- phpMyAdmin SQL Dump
+-- version 5.2.0
+-- https://www.phpmyadmin.net/
+--
+-- Host: 127.0.0.1
+-- Tempo de geração: 16-Fev-2023 às 20:23
+-- Versão do servidor: 10.4.24-MariaDB
+-- versão do PHP: 7.4.29
+
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+START TRANSACTION;
+SET time_zone = "+00:00";
+
+--
+-- Banco de dados: `mydb`
+--
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura da tabela `emprestimomonografia`
+--
+
+CREATE TABLE `emprestimomonografia` (
+  `id` int(11) NOT NULL,
+  `NomeSolicitante` varchar(50) DEFAULT NULL,
+  `Email` varchar(250) DEFAULT NULL,
+  `fk_monografia` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura da tabela `emprestimos`
+--
+
+CREATE TABLE `emprestimos` (
+  `id` int(11) NOT NULL,
+  `fk_equipamento` int(11) NOT NULL,
+  `Data` datetime DEFAULT NULL,
+  `Devolucao` datetime DEFAULT NULL,
+  `LocalUso` varchar(250) DEFAULT NULL,
+  `EmailSolicitante` varchar(250) DEFAULT NULL,
+  `fk_user` int(7) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='	';
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura da tabela `equipamentos`
+--
+
+CREATE TABLE `equipamentos` (
+  `id` int(11) NOT NULL,
+  `descricao` varchar(45) DEFAULT NULL,
+  `estado` int(2) DEFAULT NULL,
+  `name` varchar(50) DEFAULT NULL,
+  `modelo` varchar(50) DEFAULT NULL,
+  `valor` float DEFAULT NULL,
+  `file` tinytext DEFAULT NULL,
+  `marca` varchar(50) DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Extraindo dados da tabela `equipamentos`
+--
+
+INSERT INTO `equipamentos` (`id`, `descricao`, `estado`, `name`, `modelo`, `valor`, `file`, `marca`, `created_at`, `updated_at`) VALUES
+(1, 'teste', 1, 'teste', 'teste', 100, NULL, 'teste', '2023-02-16 14:21:27', '2023-02-16 14:21:27');
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura da tabela `eventos`
+--
+
+CREATE TABLE `eventos` (
+  `id` int(11) NOT NULL,
+  `name` varchar(50) DEFAULT NULL,
+  `fk_professor` int(11) NOT NULL,
+  `Data` datetime DEFAULT NULL,
+  `Titulo` varchar(150) DEFAULT NULL,
+  `Campus` varchar(50) DEFAULT NULL,
+  `Link` varchar(250) DEFAULT NULL,
+  `Tipo` tinyint(4) DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Extraindo dados da tabela `eventos`
+--
+
+INSERT INTO `eventos` (`id`, `name`, `fk_professor`, `Data`, `Titulo`, `Campus`, `Link`, `Tipo`, `created_at`, `updated_at`) VALUES
+(1, '1', 1, NULL, '1', '1', '1', 1, '2023-02-15 17:42:05', '2023-02-15 17:42:05');
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura da tabela `monografias`
+--
+
+CREATE TABLE `monografias` (
+  `id` int(11) NOT NULL,
+  `nome` varchar(250) DEFAULT NULL,
+  `fk_professor` int(11) NOT NULL,
+  `file` text DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura da tabela `notasposgraduacao`
+--
+
+CREATE TABLE `notasposgraduacao` (
+  `id` int(11) NOT NULL,
+  `Nome` varchar(100) DEFAULT NULL,
+  `Local` varchar(100) DEFAULT NULL,
+  `ValorNota` float DEFAULT NULL,
+  `fk_professor` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura da tabela `oauth_access_tokens`
+--
+
+CREATE TABLE `oauth_access_tokens` (
+  `id` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `user_id` bigint(20) UNSIGNED DEFAULT NULL,
+  `client_id` bigint(20) UNSIGNED NOT NULL,
+  `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `scopes` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `revoked` tinyint(1) NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  `expires_at` datetime DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Extraindo dados da tabela `oauth_access_tokens`
+--
+
+INSERT INTO `oauth_access_tokens` (`id`, `user_id`, `client_id`, `name`, `scopes`, `revoked`, `created_at`, `updated_at`, `expires_at`) VALUES
+('015d4415b34b4740f79ce68f1e4ffd5ef0efa8356a021288483d1d7cc2fb74ee26cd733e20c85e4e', 1, 2, NULL, '[]', 0, '2023-02-15 15:15:05', '2023-02-15 15:15:05', '2024-02-15 12:15:05'),
+('065b57817f537ac16adebadb6ff06f45dcb88b9c0614dce481a721feff9f1e228b6adf3b9c55d46d', 1, 2, NULL, '[]', 0, '2023-02-15 15:15:05', '2023-02-15 15:15:05', '2024-02-15 12:15:05'),
+('080936c6810fe28f2491e66165beb0f39fb64f0d62d21b16003546e0897dd26cb788abf6d3ae0341', 1, 2, NULL, '[]', 0, '2023-02-15 15:15:03', '2023-02-15 15:15:03', '2024-02-15 12:15:03'),
+('0e7b814cd7603e04c1edeeaf7d713c87d4a52f27e7514d37a55656f5583f0f4022d79bc8fc6341e1', 1, 2, NULL, '[]', 0, '2023-02-15 15:16:23', '2023-02-15 15:16:23', '2024-02-15 12:16:23'),
+('17b372031ad4dc449d7e51eb02c3c8ee40b26488932b82fcaf774b5af57930aac9f3f82429c7fa00', 1, 2, NULL, '[]', 0, '2023-02-15 15:15:04', '2023-02-15 15:15:04', '2024-02-15 12:15:04'),
+('1c2f8754cbc8d91d574f20de4887cf342df3514f60c0de1384b52ea62e3660b901f02d7acc1e5a0b', 1, 2, NULL, '[]', 0, '2023-02-15 15:15:04', '2023-02-15 15:15:04', '2024-02-15 12:15:04'),
+('1c3101712b9cdeb35e5bac418c6a6edde96fd0f9ee7b7b4654c5468063f03614dddf6c557b66194d', 1, 2, NULL, '[]', 0, '2023-02-15 15:15:04', '2023-02-15 15:15:04', '2024-02-15 12:15:04'),
+('33c40f1333582e641604d18f0eee13ab068cd46bae1f69a4ee7277e5f7a5f28720bfe978472a4236', 1, 2, NULL, '[]', 0, '2023-02-14 13:57:13', '2023-02-14 13:57:13', '2024-02-14 10:57:13'),
+('4e504b019c52b5a3d5dcd8783889e62ca54fa74475ea1e0c611a2f7f26cd2c3ea3d3be60cdc461ea', 1, 2, NULL, '[]', 0, '2023-02-15 15:15:03', '2023-02-15 15:15:03', '2024-02-15 12:15:03'),
+('5af044d19f8d49ccb0bbad4d498ed7f9ffa7cf1ac2487e7db8de6277bf4a5d5a951f8919c07e9564', 1, 2, NULL, '[]', 0, '2023-02-15 15:15:02', '2023-02-15 15:15:02', '2024-02-15 12:15:02'),
+('5b8b33a07bafcae6c1bc7fd647be75cb9e959a31f606df8aaad7fb11c7c3429e745fd952b5497f99', 1, 2, NULL, '[]', 0, '2023-02-15 15:15:05', '2023-02-15 15:15:05', '2024-02-15 12:15:05'),
+('664e1f238e7eafc698ad4c08d2c5cbc660a2756bd2fb3945fc8566be72dd325cb6caf7ed43fc6c71', 1, 2, NULL, '[]', 0, '2023-02-16 17:25:31', '2023-02-16 17:25:31', '2024-02-16 14:25:31'),
+('7b4ac85f8a76c2904f9338b44429fee5556e4c1b892ceef18f233a850d29d3503de8edd84cc08818', 1, 2, NULL, '[]', 0, '2023-02-14 14:10:24', '2023-02-14 14:10:24', '2024-02-14 11:10:24'),
+('7e98469845a31642952f2a84f0847f3013d42079dcb3e9056a99f727793634137c824916d73c3ef6', 1, 2, NULL, '[]', 0, '2023-02-15 15:15:04', '2023-02-15 15:15:04', '2024-02-15 12:15:04'),
+('85e6b52ec93a951cec331337cfd8e12447fab68c661a623fd1c0d4868e36ab68bdeabe8aece9c05e', 1, 2, NULL, '[]', 0, '2023-02-16 13:52:44', '2023-02-16 13:52:44', '2024-02-16 10:52:44'),
+('8a94e2df1293dc9e7284933c198540f8192c66f342d9d67c54c2f1603bc202e87cd822afbc92d674', 1, 2, NULL, '[]', 0, '2023-02-15 15:14:55', '2023-02-15 15:14:55', '2024-02-15 12:14:55'),
+('912c199bffd5c1c6d7c7984a0c68f5365fb4d67243ab6a387138190a52090caef2bf054d61a87622', 1, 2, NULL, '[]', 0, '2023-02-15 15:15:04', '2023-02-15 15:15:04', '2024-02-15 12:15:04'),
+('91573197ca686ceac0ae5ba68b080144597c0aa2c47daf4ec9daf0749922a77e2938b849dd70b998', 1, 2, NULL, '[]', 0, '2023-02-15 15:15:04', '2023-02-15 15:15:04', '2024-02-15 12:15:04'),
+('99627a3a6c66f62e4ab9955f6afb70ff9f7306087ba9b8a84ef10197a3e4adf26f95a6a31e97ae01', 1, 2, NULL, '[]', 0, '2023-02-15 15:15:04', '2023-02-15 15:15:04', '2024-02-15 12:15:04'),
+('9ab0687e314fab8723e78168dc28b3bb1a849e286f0b09339ba34db49dc9c3ab9566ad019f15e001', 1, 2, NULL, '[]', 0, '2023-02-15 15:14:57', '2023-02-15 15:14:57', '2024-02-15 12:14:57'),
+('a34f008429a28b4a21610d1c8cfefbdd75f81d06f3cd1ce1856dea5a007fda78abd1f7ed63161f1a', 1, 2, NULL, '[]', 0, '2023-02-15 15:17:33', '2023-02-15 15:17:33', '2024-02-15 12:17:33'),
+('b8c7571aba4d1abfd60d2277f3ba85a5917d6d57385c230ef578dea3e6c9699fc63b9244dfce3771', 1, 2, NULL, '[]', 0, '2023-02-16 13:52:43', '2023-02-16 13:52:43', '2024-02-16 10:52:43'),
+('c58704af45f34036bce972020309eb10062067b1a95a879e8cb10ee34ea18a07aef10c38876baae4', 1, 2, NULL, '[]', 0, '2023-02-15 15:15:03', '2023-02-15 15:15:03', '2024-02-15 12:15:03'),
+('cf0e009987641a83ef494e4e6d0659c8c1f12b547491da479b3874f372e4a140e6c1c09ee9fc94b1', 1, 2, NULL, '[]', 0, '2023-02-15 15:15:05', '2023-02-15 15:15:05', '2024-02-15 12:15:05'),
+('f3d2e590025725ffd1af3b0f443be518d4f036dd14e38a48abd3004f67ec1ec5f054cb8e20989a8b', 1, 2, NULL, '[]', 0, '2023-02-15 15:15:05', '2023-02-15 15:15:05', '2024-02-15 12:15:05'),
+('f5e0c014db2faef4b87774034833b47161cf4265e274455062648b61492e866c89c202d0a37ccdec', 1, 2, NULL, '[]', 0, '2023-02-15 15:15:05', '2023-02-15 15:15:05', '2024-02-15 12:15:05'),
+('f74732b27b964d86555b3ba3489346d7d58a1d0e7c2be81825033ca6579c4397abcc12f6f7ec9826', 1, 2, NULL, '[]', 0, '2023-02-15 15:14:57', '2023-02-15 15:14:57', '2024-02-15 12:14:57');
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura da tabela `oauth_auth_codes`
+--
+
+CREATE TABLE `oauth_auth_codes` (
+  `id` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `user_id` bigint(20) UNSIGNED NOT NULL,
+  `client_id` bigint(20) UNSIGNED NOT NULL,
+  `scopes` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `revoked` tinyint(1) NOT NULL,
+  `expires_at` datetime DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura da tabela `oauth_clients`
+--
+
+CREATE TABLE `oauth_clients` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `user_id` bigint(20) UNSIGNED DEFAULT NULL,
+  `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `secret` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `provider` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `redirect` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `personal_access_client` tinyint(1) NOT NULL,
+  `password_client` tinyint(1) NOT NULL,
+  `revoked` tinyint(1) NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Extraindo dados da tabela `oauth_clients`
+--
+
+INSERT INTO `oauth_clients` (`id`, `user_id`, `name`, `secret`, `provider`, `redirect`, `personal_access_client`, `password_client`, `revoked`, `created_at`, `updated_at`) VALUES
+(1, NULL, 'Laravel Personal Access Client', 'BweSsAyKprDOWI0jCBTMh3lmLKJSGOxWpTMXS1CR', NULL, 'http://localhost', 1, 0, 0, '2023-01-03 22:53:09', '2023-01-03 22:53:09'),
+(2, NULL, 'Laravel Password Grant Client', 'MwRag6W0qrQ5g82YTQJ8ZzgFddIOKSKQnMB22f9n', 'users', 'http://localhost', 0, 1, 0, '2023-01-03 22:53:09', '2023-01-03 22:53:09');
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura da tabela `oauth_personal_access_clients`
+--
+
+CREATE TABLE `oauth_personal_access_clients` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `client_id` bigint(20) UNSIGNED NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Extraindo dados da tabela `oauth_personal_access_clients`
+--
+
+INSERT INTO `oauth_personal_access_clients` (`id`, `client_id`, `created_at`, `updated_at`) VALUES
+(1, 1, '2023-01-03 22:53:09', '2023-01-03 22:53:09');
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura da tabela `oauth_refresh_tokens`
+--
+
+CREATE TABLE `oauth_refresh_tokens` (
+  `id` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `access_token_id` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `revoked` tinyint(1) NOT NULL,
+  `expires_at` datetime DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Extraindo dados da tabela `oauth_refresh_tokens`
+--
+
+INSERT INTO `oauth_refresh_tokens` (`id`, `access_token_id`, `revoked`, `expires_at`) VALUES
+('09df966f0e7121ecb87346d56f12131b364527a53d8b693536d757d7778ab783ce5d8e275c7a236d', '9ab0687e314fab8723e78168dc28b3bb1a849e286f0b09339ba34db49dc9c3ab9566ad019f15e001', 0, '2024-02-15 12:14:57'),
+('103aa53a5dd825f351ae4ae0e0f799674a0b9de9f586be9cf3cfbcff6fb27ccd40f4e2a6b9aa9bbd', '7e98469845a31642952f2a84f0847f3013d42079dcb3e9056a99f727793634137c824916d73c3ef6', 0, '2024-02-15 12:15:04'),
+('1449f6a593296dee26a3a4fa9b10b9573e346e50e01eac55a887f749722d77a9dcbde27a0e20d694', '33c40f1333582e641604d18f0eee13ab068cd46bae1f69a4ee7277e5f7a5f28720bfe978472a4236', 0, '2024-02-14 10:57:13'),
+('15b28ddaa412a3c6029e400cb83601319433e1fc1589848c48b5e4e2b9ec8d8e775dfa5fe62cae9c', '0e7b814cd7603e04c1edeeaf7d713c87d4a52f27e7514d37a55656f5583f0f4022d79bc8fc6341e1', 0, '2024-02-15 12:16:23'),
+('18ff7b84c8dd742d0c09dfe92f453540605e1b703584173fa6eaa585edce3c926122e682b955827f', 'f5e0c014db2faef4b87774034833b47161cf4265e274455062648b61492e866c89c202d0a37ccdec', 0, '2024-02-15 12:15:05'),
+('198c2679fec2ea814b4071943b1b9a89747f1639878af96d8581b883efd70ad8ab29fcb972bc9eaf', '7b4ac85f8a76c2904f9338b44429fee5556e4c1b892ceef18f233a850d29d3503de8edd84cc08818', 0, '2024-02-14 11:10:24'),
+('49ceaf491dbb7c0800c28e55220ac190b42c8e3d9a03dd4e53be8a5b6f83cfd9d263f703a043f93d', '1c2f8754cbc8d91d574f20de4887cf342df3514f60c0de1384b52ea62e3660b901f02d7acc1e5a0b', 0, '2024-02-15 12:15:04'),
+('4f17b8f7b5a2948e6e5004ea428ddcb3fa8456593f577244c1a9212c2d7004e34066858c48122acf', '065b57817f537ac16adebadb6ff06f45dcb88b9c0614dce481a721feff9f1e228b6adf3b9c55d46d', 0, '2024-02-15 12:15:05'),
+('5d506ac29e543d14300619cddcef3c19c45bce89a437fbd519b6a27bc734e51bbd8a855716c60917', '17b372031ad4dc449d7e51eb02c3c8ee40b26488932b82fcaf774b5af57930aac9f3f82429c7fa00', 0, '2024-02-15 12:15:04'),
+('656dd8af59d31333886f32b300241d30427b800849f1157bfcd41016e35bb1e6ed672441c457abe1', 'f3d2e590025725ffd1af3b0f443be518d4f036dd14e38a48abd3004f67ec1ec5f054cb8e20989a8b', 0, '2024-02-15 12:15:05'),
+('7941b290ccb0ff87af7c7e17caf1d31c8780eb633ad5370508a5a68ee383b0eeb5702d5021b6987e', 'c58704af45f34036bce972020309eb10062067b1a95a879e8cb10ee34ea18a07aef10c38876baae4', 0, '2024-02-15 12:15:03'),
+('7c8ec1c7f073fa18b81376e6c5ea9133350fb3eed5133d34c24d226661a3a65096d927921535e2bb', 'f74732b27b964d86555b3ba3489346d7d58a1d0e7c2be81825033ca6579c4397abcc12f6f7ec9826', 0, '2024-02-15 12:14:57'),
+('96e7e19a7d6bfb555fbc96cd1d943c6ec219ba5dd8b11e4f6e96442028dae7ff0b374a0fa0b1ff4e', '015d4415b34b4740f79ce68f1e4ffd5ef0efa8356a021288483d1d7cc2fb74ee26cd733e20c85e4e', 0, '2024-02-15 12:15:05'),
+('98502724bc9701655a4b19a82bdd49750747820e363ca2c96f77d9d42b4e3e4530144d6818c5f9a6', '1c3101712b9cdeb35e5bac418c6a6edde96fd0f9ee7b7b4654c5468063f03614dddf6c557b66194d', 0, '2024-02-15 12:15:04'),
+('9c335aa58a26b1672b63b367e5195f7ac93389adfcd8f2b5edae3c4619f4643454810bb8705298e7', '85e6b52ec93a951cec331337cfd8e12447fab68c661a623fd1c0d4868e36ab68bdeabe8aece9c05e', 0, '2024-02-16 10:52:44'),
+('a6ffe9972c823111d463058c00bfaa39a8eb00c48efc37f4be89016448e9b9ca05ae8d978d9b932c', '8a94e2df1293dc9e7284933c198540f8192c66f342d9d67c54c2f1603bc202e87cd822afbc92d674', 0, '2024-02-15 12:14:55'),
+('a9bf9f1b78bf04ad1efa35347f31b342d2ce96434a2dfe123a358ed15f2c4231566d8b95b2959a6c', '080936c6810fe28f2491e66165beb0f39fb64f0d62d21b16003546e0897dd26cb788abf6d3ae0341', 0, '2024-02-15 12:15:03'),
+('a9ceb889d45a3863abdbbdccdfa39be4bbb19a99af293adfff86e86471b7560c39e22c194ede99c8', '5af044d19f8d49ccb0bbad4d498ed7f9ffa7cf1ac2487e7db8de6277bf4a5d5a951f8919c07e9564', 0, '2024-02-15 12:15:02'),
+('b185f0d467e1fe55a4d04fddb7beee22b23deeba2c2bc68c8498b3035a7d4db332cdcc3504c26a02', 'b8c7571aba4d1abfd60d2277f3ba85a5917d6d57385c230ef578dea3e6c9699fc63b9244dfce3771', 0, '2024-02-16 10:52:43'),
+('c35258dfb63d084061dc4b7579ab618bca27d4a4e9a5eacba745439345c4970019b026ead01c2bba', '4e504b019c52b5a3d5dcd8783889e62ca54fa74475ea1e0c611a2f7f26cd2c3ea3d3be60cdc461ea', 0, '2024-02-15 12:15:03'),
+('c5245e7d952c3aa1634dc7cbbbe039bf6b9b3b3b637db656a487041b7dccf341873f088d15a47fcc', '99627a3a6c66f62e4ab9955f6afb70ff9f7306087ba9b8a84ef10197a3e4adf26f95a6a31e97ae01', 0, '2024-02-15 12:15:04'),
+('c7efa8860441342dffa01f99b6df9dcda7246d20d5d7bf92d4a8a51f20928d8267ea73f21b910885', 'cf0e009987641a83ef494e4e6d0659c8c1f12b547491da479b3874f372e4a140e6c1c09ee9fc94b1', 0, '2024-02-15 12:15:05'),
+('d6c8b7d47fb8e7b6efca9750e70e6662f84d3aee4ff9e88f0aaa00438c39c163a221b61c8f44b8a7', '912c199bffd5c1c6d7c7984a0c68f5365fb4d67243ab6a387138190a52090caef2bf054d61a87622', 0, '2024-02-15 12:15:04'),
+('eb060f875ef045f4ed6005baf887eb0b7531a5465a732ee4fbfff42422c9c46ac681be18e4286f54', '91573197ca686ceac0ae5ba68b080144597c0aa2c47daf4ec9daf0749922a77e2938b849dd70b998', 0, '2024-02-15 12:15:04'),
+('ee6d4ad2ba2898c12dee7800655a48a8b7f610cd364a67caaf9b9984284c959debfc0d056f17ecc6', '664e1f238e7eafc698ad4c08d2c5cbc660a2756bd2fb3945fc8566be72dd325cb6caf7ed43fc6c71', 0, '2024-02-16 14:25:31'),
+('f4acd7fe740664136df10dde35bbcc70d6deb69b3f85e5f1e8954262d56d35e50a6b061fa4a8e253', '5b8b33a07bafcae6c1bc7fd647be75cb9e959a31f606df8aaad7fb11c7c3429e745fd952b5497f99', 0, '2024-02-15 12:15:05'),
+('fb9e8405071fa39e4dd28e65e321f9a6c36653ba416cdf614af1113ac883f0a0b9d5fa0a9a8e1de4', 'a34f008429a28b4a21610d1c8cfefbdd75f81d06f3cd1ce1856dea5a007fda78abd1f7ed63161f1a', 0, '2024-02-15 12:17:33');
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura da tabela `perfil`
+--
+
+CREATE TABLE `perfil` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `perfil` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Extraindo dados da tabela `perfil`
+--
+
+INSERT INTO `perfil` (`id`, `perfil`, `created_at`, `updated_at`) VALUES
+(1, 'teste1', '2023-02-13 20:01:29', '2023-02-13 20:01:29');
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura da tabela `perfil_permissoes`
+--
+
+CREATE TABLE `perfil_permissoes` (
+  `id` int(11) NOT NULL,
+  `perfil_id` int(11) DEFAULT NULL,
+  `permissao_id` int(11) DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Extraindo dados da tabela `perfil_permissoes`
+--
+
+INSERT INTO `perfil_permissoes` (`id`, `perfil_id`, `permissao_id`, `created_at`, `updated_at`) VALUES
+(1, 1, 1, '2023-02-14 14:09:27', '2023-02-14 14:09:27');
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura da tabela `permissoes`
+--
+
+CREATE TABLE `permissoes` (
+  `id` int(11) NOT NULL,
+  `permissao` varchar(50) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  `texto` varchar(50) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Extraindo dados da tabela `permissoes`
+--
+
+INSERT INTO `permissoes` (`id`, `permissao`, `created_at`, `updated_at`, `texto`) VALUES
+(1, 'teste', '2023-02-14 14:08:18', '2023-02-14 14:08:18', 'teste');
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura da tabela `personal_access_tokens`
+--
+
+CREATE TABLE `personal_access_tokens` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `tokenable_type` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `tokenable_id` bigint(20) UNSIGNED NOT NULL,
+  `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `token` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `abilities` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `last_used_at` timestamp NULL DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura da tabela `professores`
+--
+
+CREATE TABLE `professores` (
+  `id` int(11) NOT NULL,
+  `Nome` varchar(50) NOT NULL,
+  `Titulacao` int(11) DEFAULT NULL,
+  `Situacao` int(11) DEFAULT NULL,
+  `Nivel` int(11) DEFAULT NULL,
+  `Email` varchar(100) DEFAULT NULL,
+  `Email_Institucional` varchar(100) DEFAULT NULL,
+  `Lattes` varchar(100) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Extraindo dados da tabela `professores`
+--
+
+INSERT INTO `professores` (`id`, `Nome`, `Titulacao`, `Situacao`, `Nivel`, `Email`, `Email_Institucional`, `Lattes`) VALUES
+(1, 'teste', 1, 1, 1, 'teste@gmail.com', 'teste@unimontes', 'teste');
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura da tabela `reuniao`
+--
+
+CREATE TABLE `reuniao` (
+  `id` int(11) NOT NULL,
+  `Pauta` varchar(250) DEFAULT NULL,
+  `Tipo` tinyint(4) DEFAULT NULL,
+  `Link` varchar(250) DEFAULT NULL,
+  `Local` varchar(250) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura da tabela `users`
+--
+
+CREATE TABLE `users` (
+  `id` int(11) NOT NULL,
+  `name` varchar(191) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `email` varchar(191) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `email_verified_at` timestamp NULL DEFAULT NULL,
+  `password` varchar(191) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `remember_token` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  `username` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `perfil` int(11) NOT NULL DEFAULT 0,
+  `foto` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `type` int(1) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Extraindo dados da tabela `users`
+--
+
+INSERT INTO `users` (`id`, `name`, `email`, `email_verified_at`, `password`, `remember_token`, `created_at`, `updated_at`, `username`, `perfil`, `foto`, `type`) VALUES
+(1, 'admin', 'admin@gmail.com', NULL, '$2y$10$kRkG0BJixbIlTeFsiIQfMeKPmCQgqlZL5ZnJ.3TCCJTZ4/Ie.Z6Ri', NULL, '2023-02-14 13:55:38', '2023-02-14 13:55:38', 'admin', 1, NULL, NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura da tabela `websockets_statistics_entries`
+--
+
+CREATE TABLE `websockets_statistics_entries` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `app_id` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `peak_connection_count` int(11) NOT NULL,
+  `websocket_message_count` int(11) NOT NULL,
+  `api_message_count` int(11) NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Índices para tabelas despejadas
+--
+
+--
+-- Índices para tabela `emprestimomonografia`
+--
+ALTER TABLE `emprestimomonografia`
+  ADD PRIMARY KEY (`id`,`fk_monografia`),
+  ADD KEY `fk_EmprestimoMonografia_Monografia1_idx` (`fk_monografia`);
+
+--
+-- Índices para tabela `emprestimos`
+--
+ALTER TABLE `emprestimos`
+  ADD PRIMARY KEY (`id`,`fk_equipamento`),
+  ADD KEY `fk_Emprestimo_Equipamento1` (`fk_equipamento`),
+  ADD KEY `fk_Emprestimo_users1` (`fk_user`);
+
+--
+-- Índices para tabela `equipamentos`
+--
+ALTER TABLE `equipamentos`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Índices para tabela `eventos`
+--
+ALTER TABLE `eventos`
+  ADD PRIMARY KEY (`id`,`fk_professor`),
+  ADD KEY `fk_Evento_Professor1_idx` (`fk_professor`);
+
+--
+-- Índices para tabela `monografias`
+--
+ALTER TABLE `monografias`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `fk_Monografia_Professor1_idx` (`fk_professor`);
+
+--
+-- Índices para tabela `notasposgraduacao`
+--
+ALTER TABLE `notasposgraduacao`
+  ADD PRIMARY KEY (`id`,`fk_professor`),
+  ADD KEY `fk_NotasPosGraduacao_Professor1_idx` (`fk_professor`);
+
+--
+-- Índices para tabela `oauth_access_tokens`
+--
+ALTER TABLE `oauth_access_tokens`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `oauth_access_tokens_user_id_index` (`user_id`);
+
+--
+-- Índices para tabela `oauth_auth_codes`
+--
+ALTER TABLE `oauth_auth_codes`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `oauth_auth_codes_user_id_index` (`user_id`);
+
+--
+-- Índices para tabela `oauth_clients`
+--
+ALTER TABLE `oauth_clients`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `oauth_clients_user_id_index` (`user_id`);
+
+--
+-- Índices para tabela `oauth_personal_access_clients`
+--
+ALTER TABLE `oauth_personal_access_clients`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Índices para tabela `oauth_refresh_tokens`
+--
+ALTER TABLE `oauth_refresh_tokens`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `oauth_refresh_tokens_access_token_id_index` (`access_token_id`);
+
+--
+-- Índices para tabela `perfil`
+--
+ALTER TABLE `perfil`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Índices para tabela `perfil_permissoes`
+--
+ALTER TABLE `perfil_permissoes`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Índices para tabela `permissoes`
+--
+ALTER TABLE `permissoes`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Índices para tabela `personal_access_tokens`
+--
+ALTER TABLE `personal_access_tokens`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `personal_access_tokens_token_unique` (`token`),
+  ADD KEY `personal_access_tokens_tokenable_type_tokenable_id_index` (`tokenable_type`,`tokenable_id`);
+
+--
+-- Índices para tabela `professores`
+--
+ALTER TABLE `professores`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Índices para tabela `reuniao`
+--
+ALTER TABLE `reuniao`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Índices para tabela `users`
+--
+ALTER TABLE `users`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `email` (`email`);
+
+--
+-- Índices para tabela `websockets_statistics_entries`
+--
+ALTER TABLE `websockets_statistics_entries`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- AUTO_INCREMENT de tabelas despejadas
+--
+
+--
+-- AUTO_INCREMENT de tabela `emprestimomonografia`
+--
+ALTER TABLE `emprestimomonografia`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT de tabela `emprestimos`
+--
+ALTER TABLE `emprestimos`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT de tabela `equipamentos`
+--
+ALTER TABLE `equipamentos`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT de tabela `eventos`
+--
+ALTER TABLE `eventos`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT de tabela `monografias`
+--
+ALTER TABLE `monografias`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT de tabela `notasposgraduacao`
+--
+ALTER TABLE `notasposgraduacao`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT de tabela `oauth_clients`
+--
+ALTER TABLE `oauth_clients`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT de tabela `oauth_personal_access_clients`
+--
+ALTER TABLE `oauth_personal_access_clients`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT de tabela `perfil`
+--
+ALTER TABLE `perfil`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT de tabela `perfil_permissoes`
+--
+ALTER TABLE `perfil_permissoes`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=120;
+
+--
+-- AUTO_INCREMENT de tabela `permissoes`
+--
+ALTER TABLE `permissoes`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
+
+--
+-- AUTO_INCREMENT de tabela `personal_access_tokens`
+--
+ALTER TABLE `personal_access_tokens`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT de tabela `professores`
+--
+ALTER TABLE `professores`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT de tabela `reuniao`
+--
+ALTER TABLE `reuniao`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT de tabela `users`
+--
+ALTER TABLE `users`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- Restrições para despejos de tabelas
+--
+
+--
+-- Limitadores para a tabela `emprestimomonografia`
+--
+ALTER TABLE `emprestimomonografia`
+  ADD CONSTRAINT `fk_EmprestimoMonografia_Monografia1` FOREIGN KEY (`fk_monografia`) REFERENCES `monografias` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+--
+-- Limitadores para a tabela `emprestimos`
+--
+ALTER TABLE `emprestimos`
+  ADD CONSTRAINT `fk_Emprestimo_Equipamento1` FOREIGN KEY (`fk_equipamento`) REFERENCES `equipamentos` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `fk_Emprestimo_users1` FOREIGN KEY (`fk_user`) REFERENCES `users` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+--
+-- Limitadores para a tabela `eventos`
+--
+ALTER TABLE `eventos`
+  ADD CONSTRAINT `fk_Evento_Professor1` FOREIGN KEY (`fk_professor`) REFERENCES `professores` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+--
+-- Limitadores para a tabela `monografias`
+--
+ALTER TABLE `monografias`
+  ADD CONSTRAINT `fk_Monografia_Professor1` FOREIGN KEY (`fk_professor`) REFERENCES `professores` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+--
+-- Limitadores para a tabela `notasposgraduacao`
+--
+ALTER TABLE `notasposgraduacao`
+  ADD CONSTRAINT `fk_NotasPosGraduacao_Professor1` FOREIGN KEY (`fk_professor`) REFERENCES `professores` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+COMMIT;
