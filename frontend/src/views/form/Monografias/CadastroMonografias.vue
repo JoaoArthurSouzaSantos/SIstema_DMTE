@@ -1,7 +1,7 @@
 <template>
     <v-form @submit.prevent="salvar">
       <v-container fluid text-xs-center>
-        <div style="border: 6px solid white; border-radius: 10px; background-color:#ECEFF1; width: auto; padding: 5px;">
+        <div style="border: 6px solid white; border-radius: 10px; background-color:#E0F2F1; width: auto; padding: 5px;">
         <v-layout row wrap>
           <v-flex xs12>
           <v-select

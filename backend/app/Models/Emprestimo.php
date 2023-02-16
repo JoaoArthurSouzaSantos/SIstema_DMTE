@@ -16,5 +16,6 @@ class Emprestimo extends Model
     "Devolucao",
     "LocalUso",
     "EmailSolicitante",
+    "fk_user",
     ];	
 }

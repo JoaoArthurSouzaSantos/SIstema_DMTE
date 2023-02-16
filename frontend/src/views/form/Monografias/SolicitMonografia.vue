@@ -15,9 +15,9 @@
             </v-flex> 
             <v-flex xs12 sm6 md5> 
               <v-select
-              :items="Users"
-              v-model="form.fk_User"
-              label="Selecione o nome User"
+              :items="Professors"
+              v-model="form.fk_Professor"
+              label="Selecione o nome Professor"
               item-text="name"
               item-value="id"
               clearable
@@ -37,13 +37,13 @@
 export default {
   data: () => ({
     items: [],
-    Users: [],
+    Professor: [],
     monografias: [],
     informacoes: [],
     form:{
       id: "",
       id: "",		
-      fk_User : "",	
+      fk_Professor : "",	
       fk_monografias: "",	
     }
   }),
@@ -53,7 +53,7 @@ export default {
       }
   },  
   mounted(){
-    this.$http.get("/api/User").then(({ data }) => (this.Users = data)); 
+    this.$http.get("/api/Professor").then(({ data }) => (this.Professors = data)); 
     this.$http.get("/api/Monografia").then(({ data }) => (this.monografias=data)); 
   },
   methods: {

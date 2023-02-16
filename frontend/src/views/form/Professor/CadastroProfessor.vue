@@ -87,7 +87,6 @@
         Email:'',	
         Email_Institucional:'',	
         Lattes:'',	
-	
       },
       lastname: '',
       //regra de requerimento

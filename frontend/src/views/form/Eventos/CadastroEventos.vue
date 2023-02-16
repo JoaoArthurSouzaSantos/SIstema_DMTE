@@ -1,6 +1,6 @@
 <template>
     <v-form @submit.prevent="salvar" >
-      <div style="border: 6px solid white; border-radius: 10px; background-color:#ECEFF1; width: auto; padding: 5px;">
+      <div style="border: 6px solid white; border-radius: 10px; background-color:#E0F2F1; width: auto; padding: 5px;">
       <v-container fluid text-xs-center>
         <v-layout row wrap>
           <v-flex xs12 sm6 md4>
@@ -25,7 +25,7 @@
           <v-select
           :items="professores"
           v-model="form.fk_professor"
-          label="Selecione o nome funcionario"
+          label="Selecione o nome do professor responsavel"
           item-text="Nome"
           item-value="id"
           clearable

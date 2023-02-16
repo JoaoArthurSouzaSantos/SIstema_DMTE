@@ -2,7 +2,7 @@
     <v-form @submit.prevent="salvar" >
       <v-container fluid text-xs-center>
         <v-layout row wrap>
-          <v-flex xs12 sm6 md5> 
+          <v-flex xs12 sm6 md4> 
               <v-select
               :items="equipamento"
               v-model="form.fk_equipamento"
@@ -39,7 +39,16 @@
               required
               filled
             ></v-text-field>
-          </v-flex>  
+          </v-flex> 
+          <v-flex xs12 sm6 md4> 
+            <v-text-field
+              v-model="form.EmailSolicitante"
+              :counter="30"
+              label="Email do solicitante"
+              required
+              filled
+            ></v-text-field>
+          </v-flex>   
           <v-flex xs12 sm12 md2>
             <v-btn class="primary" style="float:right" type="submit">salvar</v-btn>
           </v-flex>           
@@ -49,19 +58,19 @@
     </template>
       
     <script>
-    
+    import { vm } from "../../../main";
     export default {
       data: () => ({
         items: [],
         funcionarios: [],
         equipamento: [],
-        form:{
-          id: "",		
+        form:{	
           fk_equipamento: "",		
           Data: "",	
           Devolucao: "",	
           LocalUso: "",	
           EmailSolicitante: "",
+          fk_user: vm.$session.get("dados_usuarios").id
         }
       }),
       computed: {
@@ -70,6 +79,8 @@
       },  
       mounted(){
         this.$http.get("/api/Equipamento").then(({ data }) => (this.equipamento=data)); 
+        console.log('vm.$session', vm.$session.get("dados_usuarios"))
+        //this.form.fk_user =vm.$session.get("dados_usuarios").id
       },
       methods: {
         salvar: function() {

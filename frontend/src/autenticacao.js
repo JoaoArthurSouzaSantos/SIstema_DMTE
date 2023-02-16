@@ -19,7 +19,6 @@ router.beforeEach((to, from, next) => {
    //return next({ path: "/login" });
    //return next('/teste');
   } else if (to.fullPath == "/login" && localStorage["token_sistema"]) {
-    //isAuthenticated= true
     return next({ path: "/" });
   }
   return next();

@@ -40,8 +40,12 @@ class SolicitEquipamentosController extends Controller
     {
         $this->validate($request,
         [
-            'fk_User'=> 'required',
+            'fk_user'=> 'required',
             'fk_Equipamento'=> 'required',
+            'Data'=> 'required',
+            'Devolucao'=> 'required',
+            'LocalUso'=> 'required',
+            'EmailSolicitante'=> 'required',
         ],
     );
     return SolicitEquipamento::create($request->all());

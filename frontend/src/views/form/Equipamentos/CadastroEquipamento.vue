@@ -1,5 +1,6 @@
 <template>
     <v-form @submit.prevent="salvar" >
+      <div style="border: 6px solid white; border-radius: 10px; background-color:#E0F2F1; width: auto; padding: 5px;">
       <v-container fluid text-xs-center>
         <v-layout row wrap>
           <v-flex xs12 sm5 md3> 
@@ -74,6 +75,7 @@
           </v-flex>
         </v-layout>
       </v-container>
+    </div>
       <v-btn class="primary " style="float:right" type="submit">salvar</v-btn>
     </v-form>
 </template>

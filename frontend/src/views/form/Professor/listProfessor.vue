@@ -126,10 +126,8 @@
                     <td>
                       <v-checkbox primary hide-details v-model="props.selected"></v-checkbox>
                     </td>
-                    <td>{{ props.item.name}}</td>
-                    <td>{{ props.item.nome_funcao}}</td>
-                    <td>{{ props.item.nome_setor}}</td>
-                    <td>{{ props.item.nome_empresas}}</td>      
+                    <td>{{ props.item.name}}</td> 
+                    <td>{{ props.item.Titulacao}}</td>   
                     <td class="text-xs-center">
                       <v-btn
                         @click.native="getDados(props.item)"
@@ -236,14 +234,15 @@
           widgets: false
         },
         form: new Form({
-
-          name:"",	
-          funcao:"",
-          setor:"",
-          fk_setor:"",
-		      fk_funcao:"",
-		      fk_empresas_coaltech:"",
-          errors:{}
+        id:'',
+        name:'',	
+        Titulacao:'',	
+        Situacao:'',	
+        Nivel:'',	
+        Email:'',	
+        Email_Institucional:'',	
+        Lattes:'',
+        errors:{}
         }),
         complex: {
           selected: [],
@@ -253,9 +252,7 @@
               align: "left",
               value: "name"
             },
-            { text: "Função", value: "nome-funcao",},
-            { text: "Setor", value: "nome_setor",},
-            { text: "empresas", value: "nome_empresas",},
+            { text: "Situacao", value: "Situacao" },
             { text: "Ações", value: "action", align: "center" }
           ]
         }
@@ -361,15 +358,12 @@
       }
     },
     mounted(){
-          this.$http.get("/api/lista_funcionarios")
+          this.$http.get("/api/Professor")
           .then(data => {
               console.log('data.data',data.data)
               this.dados = data.data
           })
           .catch(() => {});    
-        this.$http.get("/api/setor").then(({ data }) => (this.setor = data)); 
-        this.$http.get("/api/empresas").then(({ data }) => (this.empresas=data));
-        this.$http.get("/api/funcao").then(({ data }) => (this.funcao=data)); 
     },
 
     created() {

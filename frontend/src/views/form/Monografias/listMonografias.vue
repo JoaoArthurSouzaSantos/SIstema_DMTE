@@ -314,6 +314,7 @@
     },
     mounted(){
       this.$http.get("/api/Professor").then(({ data }) => (this.Professor=data)); 
+      this.$http.get("/api/Monografia").then(({ data }) => (this.monografias = data)); 
       this.carrega()
     },
     created() {
