@@ -89,13 +89,11 @@
             console.log(this.funcionarios_EPIS);
             //this.limparCampos();
             window.getApp.$emit("APP_SAVE");
-            //this.$router.push({ path: "/forms/CadastroUsuarios" });
             loader.hide();
           })
           .catch((e) => {
             console.log(e.response);
           });
-          //this.$Progress.finish();
       },
     }
   }

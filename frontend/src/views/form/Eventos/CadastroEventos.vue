@@ -121,16 +121,14 @@
     methods: {
 
     limparCampos:function(){
-      this.basic.dialog = false;
-      this.form.reset();
+      Object.assign(this.$data.form,this.$options.data().form)
       this.form.errors={};    
     },
     salvar: function() {
           this.$Progress.start();
           this.$http.post("/api/Evento",this.form).then(data => {
-              console.log("teste",data)
-              window.getApp.$emit("APP_SAVE");
               this.limparCampos();
+              window.getApp.$emit("APP_SAVE");
             })
             .catch((e) => {
               this.form.errors = e.response.data.errors;

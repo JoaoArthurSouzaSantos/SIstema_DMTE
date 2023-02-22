@@ -49,6 +49,10 @@
       ],
     }),
     methods: {
+    limparCampos:function(){
+      Object.assign(this.$data.form,this.$options.data().form)
+      this.form.errors={};    
+    },
     salvar: function() {
           this.$Progress.start();  
           this.$http.post("/api/Monografia",this.form).then(data => {

@@ -257,20 +257,14 @@
       salvar: function() {
         this.$Progress.start();
         let loader = this.$loading.show();      
-        //this.form.post("/api/user").then(data => {
         this.$http.post("/api/Equipamento",this.form).then(data => {
-            //console.log(data);
             this.limparCampos()                    
             window.getApp.$emit("APP_SAVE");
-            //this.$store.dispatch("getUser");
-            loader.hide();
-            //this.$router.push({ path: "/forms/CadastroUsuarios" });
             
           })
           .catch((e) => {
             this.form.errors = e.response.data.errors;
             console.log(e.response.data.errors);
-            loader.hide();
           });
         this.$Progress.finish();
         
@@ -302,20 +296,16 @@
               .then(data => {
                 //console.log(data);
                 window.getApp.$emit("APP_DELETE");
-                //_this.$store.dispatch("getUser");
                 _this.$store.state.users.UserList.data
-                this.carrega()
-                //this.$router.push({ path: "/forms/CadastroUsuarios" });
-                
+                this.carrega()            
               })
               .catch(() => {});          
           }
         });
       },
       limparCampos:function(){
-        this.basic.dialog = false;
-        this.form.reset();
-        this.form.errors={};    
+      Object.assign(this.$data.form,this.$options.data().form)
+      this.form.errors={};    
       },
       carrega(){
         this.$http.get("/api/Equipamento")
@@ -333,8 +323,6 @@
           .then(data => {
             this.basic.dialog = false;   
             window.getApp.$emit("APP_EDIT");
-            //this.$store.dispatch("getUser");
-            //loader.hide();
             this.carrega()
           })
           .catch((e) => {
@@ -342,27 +330,18 @@
             console.log(e.response.data.errors);
             loader.hide();
           });
-        //console.log(dados);
         this.$Progress.finish();
       }
     },
     computed: {
       loadDados() {
       this.carrega()
-  
-         //this.$http.get("/api/user").then(({ data }) => (console.log('perfil '+JSON.stringify(data.data))));
-         //this.$http.get("/api/Equipamento").then(({ data }) => (this.dados = data.data));    
-
-        //console.log(this.$store.state.users.UserList.data);
-        //return this.$store.state.users.UserList.data;
       }
     },
     mounted(){
  
     },
     created() {
-      //this.$store.dispatch("getUser");
-      //this.$Progress.start();
     }
   };
   </script>

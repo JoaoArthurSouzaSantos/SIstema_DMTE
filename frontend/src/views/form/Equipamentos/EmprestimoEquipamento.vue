@@ -1,5 +1,6 @@
 <template>
     <v-form @submit.prevent="salvar" >
+      <div style="border: 6px solid white; border-radius: 10px; background-color:#E0F2F1; width: auto; padding: 5px;">
       <v-container fluid text-xs-center>
         <v-layout row wrap>
           <v-flex xs12 sm6 md4> 
@@ -48,12 +49,13 @@
               required
               filled
             ></v-text-field>
-          </v-flex>   
+          </v-flex>
           <v-flex xs12 sm12 md2>
             <v-btn class="primary" style="float:right" type="submit">salvar</v-btn>
-          </v-flex>           
+          </v-flex>            
         </v-layout>
       </v-container>
+    </div>
       </v-form>
     </template>
       
@@ -83,12 +85,15 @@
         //this.form.fk_user =vm.$session.get("dados_usuarios").id
       },
       methods: {
+      limparCampos:function(){
+      Object.assign(this.$data.form,this.$options.data().form)
+      this.form.errors={};    
+      },
         salvar: function() {
               this.$Progress.start();
-              this.$http.post("/api/solicit_equipamento",this.form).then(data => {
+              this.$http.post("/api/Emprestimo",this.form).then(data => {
                   this.limparCampos();
                   window.getApp.$emit("APP_SAVE");
-                  loader.hide();
                 })
                 .catch((e) => {
                   this.form.errors = e.response.data.errors;

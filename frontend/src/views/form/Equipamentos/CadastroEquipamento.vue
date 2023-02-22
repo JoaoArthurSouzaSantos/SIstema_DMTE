@@ -104,8 +104,7 @@
     methods: {
 
     limparCampos:function(){
-      this.basic.dialog = false;
-      this.form.reset();
+      Object.assign(this.$data.form,this.$options.data().form)
       this.form.errors={};    
     },
     salvar: function() {
@@ -113,7 +112,6 @@
           this.$http.post("/api/Equipamento",this.form).then(data => {
               this.limparCampos();
               window.getApp.$emit("APP_SAVE");
-              loader.hide();
             })
             .catch((e) => {
               this.form.errors = e.response.data.errors;

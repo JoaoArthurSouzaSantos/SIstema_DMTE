@@ -8,7 +8,7 @@ use App\Models\Equipamento;
 use App\Models\Emprestimo;
 use DB;
 
-class FeramentasController extends Controller
+class EmprestimoController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -41,8 +41,12 @@ class FeramentasController extends Controller
     {
         $this->validate($request,
         [
-            'fk_User'=> 'required',
-            'fk_Emprestimo'=> 'required',
+            'fk_equipamento'=> 'required',
+            'Data'=> 'required',
+            'Devolucao'=> 'required',
+            'LocalUso'=> 'required',
+            'EmailSolicitante'=> 'required',
+            'fk_user'=> 'required',
         ],
     );
     return Emprestimo::create($request->all());

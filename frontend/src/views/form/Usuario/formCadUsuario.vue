@@ -150,16 +150,15 @@ export default {
       }
 
   }, 
-
+  limparCampos:function(){
+    Object.assign(this.$data.form,this.$options.data().form)
+    this.form.errors={};    
+  },
   salvar: function(e) {
         this.$Progress.start();              
         this.$http.post("/api/User",this.form).then(data => {
-            //console.log(data);
             this.limparCampos();
             window.getApp.$emit("APP_SAVE");
-            //this.$store.dispatch("getAtualizaAcoes");
-            //this.$store.dispatch("getAcoes");
-            //this.$router.push({ path: "/forms/CadastroUsuarios" });
           })
           .catch((e) => {
             this.form.errors = e.response.data.errors;

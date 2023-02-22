@@ -109,7 +109,6 @@
     salvar: function() {
           this.$Progress.start();
           this.$http.post("/api/Professor",this.form).then(data => {
-              console.log("teste",data);
               this.limparCampos();
               window.getApp.$emit("APP_SAVE");
               loader.hide();
