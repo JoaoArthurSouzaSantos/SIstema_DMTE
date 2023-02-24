@@ -126,8 +126,8 @@
                       <v-checkbox primary hide-details v-model="props.selected"></v-checkbox>
                     </td>
                     <td>{{ props.item.name }}</td>
-                    <td>{{ props.item.estado }}</td>
-                    <td>{{ props.item.fabricante }}</td>
+                    <td>{{ props.item.Data }}</td>
+                    <td>{{ props.item.Titulo }}</td>
                     <td class="text-xs-center">
                       <v-btn
                         @click.native="getDados(props.item)"
@@ -205,6 +205,7 @@
         search: "",
         perfil:[],
         dados:[],
+        Evento:[],
         checked: false,
         editmode: false,
         basic: {
@@ -223,14 +224,13 @@
           widgets: false
         },
         form: new Form({
-          id: "",
-          name: "",	
-          CA: "",
-          estado: "",
-          marca: "",
-          valor: "",
-          file: "",
-          modelo: "",	
+          name:'',	
+          fk_professor:'',	
+          Data:'',	
+          Titulo:'',	
+          Campus:'',	
+          Link:'',	
+          Tipo:'',
           errors:{}
         }),
         complex: {
@@ -257,7 +257,7 @@
       salvar: function() {
         this.$Progress.start();
         let loader = this.$loading.show();      
-        this.$http.post("/api/Eventos",this.form).then(data => {
+        this.$http.post("/api/Evento",this.form).then(data => {
 
             this.limparCampos()                    
             window.getApp.$emit("APP_SAVE");
@@ -295,7 +295,7 @@
           if(vm.$session.get("dados_usuarios").id == id){
               window.getApp.$emit("APP_ERRO_DELETE");
           }else{
-            _this.$http.delete("/api/Eventos/"+id)
+            _this.$http.delete("/api/Evento/"+id)
               .then(data => {
                 //console.log(data);
                 window.getApp.$emit("APP_DELETE");
@@ -313,18 +313,18 @@
         this.form.errors={};    
       },
       carrega(){
-        this.$http.get("/api/Eventos")
+        this.$http.get("/api/Evento")
           .then(data => {
               console.log('data.data',data.data)
               this.dados = data.data
           })
           .catch(() => {});
-        this.$http.get("/api/Eventos").then(({ data }) => (this.materiais=data));        
+        this.$http.get("/api/Evento").then(({ data }) => (this.Evento=data));        
       },
       atualizar() {
         this.$Progress.start();
         let loader = this.$loading.show();      
-        this.$http.put("/api/Eventos/" + this.form.id,this.form)
+        this.$http.put("/api/Evento/" + this.form.id,this.form)
           .then(data => {
             this.basic.dialog = false;   
             window.getApp.$emit("APP_EDIT");

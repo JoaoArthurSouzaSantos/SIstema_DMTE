@@ -127,7 +127,8 @@
                       <v-checkbox primary hide-details v-model="props.selected"></v-checkbox>
                     </td>
                     <td>{{ props.item.name}}</td> 
-                    <td>{{ props.item.Titulacao}}</td>   
+                    <td>{{ props.item.Titulacao}}</td>
+                    <td>{{ props.item.Lattes}}</td>    
                     <td class="text-xs-center">
                       <v-btn
                         @click.native="getDados(props.item)"
@@ -248,11 +249,12 @@
           selected: [],
           headers: [
             {
-              text: "Nome",
+              text: "NOME",
               align: "left",
               value: "name"
             },
-            { text: "Situacao", value: "Situacao" },
+            { text: "SITUAÇÂO", value: "Situacao" },
+            { text: "LATES", value: "Lattes" },
             { text: "Ações", value: "action", align: "center" }
           ]
         }
@@ -266,21 +268,14 @@
       },
       salvar: function() {
         this.$Progress.start();
-        //let loader = this.$loading.show();      
-        //this.form.post("/api/user").then(data => {
         this.$http.post("/api/funcionario",this.form).then(data => {
             console.log("teste",data);
             this.limparCampos()                    
             window.getApp.$emit("APP_SAVE");
-            //this.$store.dispatch("getUser");
-            //loader.hide();
-            //this.$router.push({ path: "/forms/CadastroUsuarios" });
-            
           })
           .catch((e) => {
             this.form.errors = e.response.data.errors;
             console.log(e.response.data.errors);
-            //loader.hide();
           });
         this.$Progress.finish();
         
@@ -310,11 +305,8 @@
           }else{
             _this.$http.delete("/api/funcionario/"+id)
               .then(data => {
-                //console.log(data);
                 window.getApp.$emit("APP_DELETE");
-                //_this.$store.dispatch("getUser");
                 _this.$store.state.users.UserList.data
-                //this.$router.push({ path: "/forms/CadastroUsuarios" });
                 
               })
               .catch(() => {});          
@@ -327,34 +319,24 @@
         this.form.errors={};    
       },
       atualizar() {
-        this.$Progress.start();
-        //let loader = this.$loading.show();      
+        this.$Progress.start();     
         this.$http.put("/api/funcionario/" + this.form.id,this.form)
           .then(data => {
             this.basic.dialog = false;   
             window.getApp.$emit("APP_EDIT");
-            //this.$store.dispatch("getUser");
-            //loader.hide();
           })
           .catch((e) => {
             this.form.errors = e.response.data.errors;
             console.log(e.response.data.errors);
-            //loader.hide();
           });
-        //console.log(dados);
         this.$Progress.finish();
       }
     },
     computed: {
       loadDados() {
-  
-         //this.$http.get("/api/user").then(({ data }) => (console.log('perfil '+JSON.stringify(data.data))));
-         //this.$http.get("/api/funcionario").then(({ data }) => (this.dados = data.data));    
          if(this.dados){
           return this.dados
          } 
-        //console.log(this.$store.state.users.UserList.data);
-        //return this.$store.state.users.UserList.data;
       }
     },
     mounted(){
@@ -367,8 +349,6 @@
     },
 
     created() {
-      //this.$store.dispatch("getUser");
-      //this.$Progress.start();
     }
   };
   </script>

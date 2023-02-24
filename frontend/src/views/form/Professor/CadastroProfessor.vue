@@ -89,7 +89,6 @@
         Lattes:'',	
       },
       lastname: '',
-      //regra de requerimento
       nameRules: [
         v => !!v || 'Name is required',
         v => v.length <= 30 || 'Name must be less than 10 characters',
@@ -101,7 +100,6 @@
     methods: {
 
     limparCampos:function(){
-    //this.basic.dialog = false;
     Object.assign(this.$data.form,this.$options.data().form)
     this.form.errors={};    
     },

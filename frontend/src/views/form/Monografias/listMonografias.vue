@@ -2,7 +2,6 @@
     <div id="pageTable">
       <v-container grid-list-xl fluid>
         <v-layout row wrap v-bind="loadDados">
-          <!-- <v-flex xl4></v-flex> -->
           <v-flex lg12>
             <div slot="widget-content">
               <v-dialog v-model="basic.dialog" persistent max-width="500px">
@@ -244,7 +243,6 @@
           .catch((e) => {
             this.form.errors = e.response.data.errors;
             console.log(e.response.data.errors);
-            //loader.hide();
           });
         this.$Progress.finish();
         

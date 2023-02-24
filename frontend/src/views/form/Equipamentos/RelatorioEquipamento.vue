@@ -87,7 +87,6 @@
             
             this.funcionarios_EPIS = data.data
             console.log(this.funcionarios_EPIS);
-            //this.limparCampos();
             window.getApp.$emit("APP_SAVE");
             loader.hide();
           })

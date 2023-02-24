@@ -49,7 +49,6 @@ export default {
   }),
   computed: {
       loadDados() {
-        //console.log('dados '+this.$store.state.fornos.FornoList);
       }
   },  
   mounted(){
@@ -63,20 +62,12 @@ export default {
     },
     salvar: function() {
           this.$Progress.start();
-          //let loader = this.$loading.show(); 
-          
-          //this.form.post("/api/Acoes").then(data => {
           this.$http.post("/api/emprestimo_monografias",this.form).then(data => {
               console.log(data);
               this.limparCampos();
               window.getApp.$emit("APP_SAVE");
-              //this.$store.dispatch("getAtualizaAcoes");
-              //this.$store.dispatch("getAcoes");
-              loader.hide();
-              //this.$router.push({ path: "/forms/CadastroUsuarios" });
             })
             .catch((e) => {
-              //loader.hide();
               this.form.errors = e.response.data.errors;
               console.log(e.response.data.errors);
             });
